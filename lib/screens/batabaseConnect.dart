@@ -1,5 +1,6 @@
 import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class DatabaseConnect extends StatefulWidget {
   const DatabaseConnect({Key? key}) : super(key: key);
@@ -9,13 +10,14 @@ class DatabaseConnect extends StatefulWidget {
 }
 
 class _DatabaseConnectState extends State<DatabaseConnect> {
+  var textStyle = TextStyle(fontSize: 14, color: textColor, fontWeight: FontWeight.w100);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.7,
-        height: MediaQuery.of(context).size.height * 0.9,
+        height: MediaQuery.of(context).size.height * 0.85,
         color: secondaryColor,
         child: Container(
           padding: const EdgeInsets.all(16.0),
@@ -57,7 +59,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                           onPressed: null,
                           child: Text(
                             'Создать базу данных',
-                            style: TextStyle(fontSize: 14, color: textColor),
+                            style: textStyle
                           ),
                         )),
                   ],
@@ -66,7 +68,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
               SizedBox(height: 20),
               Text(
                 'Доступные подключения',
-                style: TextStyle(fontSize: 14, color: textColor),
+                style: textStyle
               ),
               Container(
                 width: 980,
@@ -82,7 +84,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Имя подключения'),
+                      child: Text('Имя подключения', textAlign: TextAlign.center, style: textStyle),
                     ),
                     VerticalDivider(),
                     Expanded(
@@ -90,15 +92,15 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Путь к базе данных'),
+                      child: Text('Путь к базе данных', textAlign: TextAlign.center,style: textStyle),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Пользователь'),
+                      child: Text('Пользователь', textAlign: TextAlign.center,style: textStyle),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Драйвер'),
+                      child: Text('Драйвер', textAlign: TextAlign.center,style: textStyle),
                     ),
                   ],
                 ),
@@ -139,10 +141,12 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                   ],
                 ),
               ),
-              Container(
-                width: 980,
-                height: 150,
-                color: Color(0xFF46494A),
+              Expanded(
+                child: Container(
+                  width: 980,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  color: Color(0xFF46494A),
+                ),
               ),
             ],
           ),

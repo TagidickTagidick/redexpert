@@ -136,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                       children: [
             Expanded(
                 child: Container(
-                    width: 300,
+                     width: MediaQuery.of(context).size.width * 0.7,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
