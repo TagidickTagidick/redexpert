@@ -47,8 +47,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                             style: TextStyle(fontSize: 14, color: textColor),
                           ),
                         )),
-                    Flexible(
-                      flex: 1,
+                    Expanded(
                       child: Container(),
                     ),
                     Container(
@@ -71,8 +70,79 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
               ),
               Container(
                 width: 980,
-                height: 380,
-                color: Color(0xFF4A4D4E),
+                height: 30,
+                color: Color(0xFF46494A),
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 20,
+                      child: Text(' '),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Имя подключения'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Сервер'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Путь к базе данных'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Пользователь'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Драйвер'),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 980,
+                height: 30,
+                color: Color(0xFF535657),
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 20,
+                      child: Text(' '),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Новое подключение'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('localhost'),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text(''),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text(''),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Jaybird 3 Driver'),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 980,
+                height: 150,
+                color: Color(0xFF46494A),
               ),
             ],
           ),
