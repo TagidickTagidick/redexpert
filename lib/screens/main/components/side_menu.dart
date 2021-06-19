@@ -6,97 +6,80 @@ class SideMenu extends StatelessWidget {
   List<SideBarItem> sideBarItems = [
     SideBarItem(
       icon: "assets/icons/connections.svg",
-      title: "Подключения"
-    )
+      title: "Подключения",
+      isTapped: true
+    ),
+    SideBarItem(
+        icon: "assets/icons/connections.svg",
+        title: "Подключения",
+      isTapped: false
+    ),
   ];
 
   @override
   Widget build(BuildContext context) => Drawer(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            child: Wrap(
-              direction: Axis.vertical,
-              children: [
-              RotatedBox(
-                  quarterTurns: 1,
-                  child: Row(
-                    children: [
-                      for (var item in sideBarItems)
-                        Container(
-                            height: 100,
+          RotatedBox(
+              quarterTurns: 1,
+              child: Row(
+                  children: [
+                    for (var item in sideBarItems)
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Container(
+                            height: 26,
                             width: 112,
                             child: Column(
-                              children: [
-                                Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                          item.icon!
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(item.title!)
-                                    ]
-                                ),
-                                Container(
-                                    height: 10,
-                                    width: double.infinity,
-                                    color: Colors.red
-                                )
-                              ],
+                                children: [
+                                  Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                            item.icon!
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(item.title!)
+                                      ]
+                                  ),
+                                  Container(
+                                      height: 10,
+                                      width: double.infinity,
+                                      color: item.isTapped!
+                                          ? Color(0xff8A2627)
+                                          : Color(0xff3C3F41)
+                                  )
+                                ]
                             )
-                        )
-                    ]
-                  )
-              ),
-                Container(
-                  width: 100,
-                  child: ListView(
-                      children: [
-                        BottomNavigationBar(
-                          type: BottomNavigationBarType.fixed,
-                          items: [
-                            BottomNavigationBarItem(
-                                icon: SvgPicture.asset(
-                                    "assets/icons/drop_box.svg"
-                                ),
-                                label: ""
-                            ),
-                            BottomNavigationBarItem(
-                                icon: SvgPicture.asset(
-                                    "assets/icons/folder.svg"
-                                ),
-                                label: "да"
-                            ),
-                            BottomNavigationBarItem(
-                                icon: SvgPicture.asset(
-                                    "assets/icons/Documents.svg"
-                                ),
-                                label: ""
-                            ),
-                          ],
                         ),
-                        DrawerListTile(
-                            title: "Подключения к базе данных",
-                            svgSrc: "assets/icons/drop_box.svg",
-                            press: () {},
-                            isFolder: true
-                        ),
-                        DrawerListTile(
-                          title: "Favourites",
-                          svgSrc: "assets/icons/folder.svg",
-                          press: () {},
-                        ),
-                        DrawerListTile(
-                            title: "Новое подключение",
-                            svgSrc: "assets/icons/Documents.svg",
-                            press: () {}
-                        )
-                      ]
-                  )
-                )
-              ],
-            ),
+                      )
+                  ]
+              )
           ),
+          Container(
+            width: 100,
+            child: Column(
+                children: [
+                  Container(
+                    height: 20,
+                    color: Color(0xff8A2627),
+                    child: Row(
+                      children: [
+                        Text("Подключения"),
+                        Spacer(),
+                        SvgPicture.asset("assets/icons/exit.svg")
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+
+                    ],
+                  )
+                ]
+            )
+          )
         ]
       )
   );
