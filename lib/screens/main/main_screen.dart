@@ -22,16 +22,16 @@ class MainScreen extends StatelessWidget {
                 toolItem('createfile', 16),
                 toolItem('file', 16),
                 toolItem('save', 16),
-                VerticalDivider(),
+                VerticalDivider(color: Color(0xff2C2C2C)),
                 toolItem('print', 16),
-                VerticalDivider(),
+                VerticalDivider(color: Color(0xff2C2C2C)),
                 toolItem('cut', 18),
                 toolItem('copy', 16),
                 toolItem('insertFile', 16),
-                VerticalDivider(),
+                VerticalDivider(color: Color(0xff2C2C2C)),
                 toolItem('undo', 16),
                 toolItem('redo', 16),
-                VerticalDivider(),
+                VerticalDivider(color: Color(0xff2C2C2C)),
                 toolItem('edit', 16),
                 toolItem('databaseAdd', 16),
                 toolItem('code', 16),
@@ -39,7 +39,7 @@ class MainScreen extends StatelessWidget {
                 toolItem('database', 18),
                 toolItem('people', 16),
                 toolItem('key', 16),
-                VerticalDivider(),
+                VerticalDivider(color: Color(0xff2C2C2C)),
                 toolItem('wrench', 16),
                 toolItem('help', 16),
                 toolItem('info', 16),
@@ -48,9 +48,16 @@ class MainScreen extends StatelessWidget {
           ),
           SafeArea(
               child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            if (Responsive.isDesktop(context)) Expanded(child: SideMenu()),
-            Expanded(flex: 5, child: DashboardScreen())
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+            Expanded(
+                child: SideMenu()
+            ),
+            // Expanded(
+            //     flex: 5,
+            //     child: DashboardScreen()
+            // )
           ])),
         ],
       ));
