@@ -1,18 +1,15 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/batabaseConnect.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
-import '../batabaseConnect.dart';
 import 'components/side_menu.dart';
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(),
       body: Column(
         children: [
           Container(
@@ -40,7 +37,7 @@ class MainScreen extends StatelessWidget {
                 toolItem('database', 18),
                 toolItem('people', 16),
                 toolItem('key', 16),
-                VerticalDivider(color: Color(0xff2C2C2C)),
+                VerticalDivider(color: Colors.transparent),
                 toolItem('wrench', 16),
                 toolItem('help', 16),
                 toolItem('info', 16),
@@ -49,9 +46,13 @@ class MainScreen extends StatelessWidget {
           ),
           SafeArea(
               child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SideMenu(),
-            DatabaseConnect(),
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+            Expanded(
+                child: SideMenu()
+            ),
+            DatabaseConnect()
             // Expanded(
             //     flex: 5,
             //     child: DashboardScreen()
