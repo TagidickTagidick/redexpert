@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../models/side_bar_item.dart';
 import '../../../models/tool_bar_item.dart';
@@ -10,6 +11,8 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   double padding = 0.0;
+
+  int tapped = 0;
 
   List<SideBarItem> sideBarItems = [
     SideBarItem(
@@ -52,37 +55,44 @@ class _SideMenuState extends State<SideMenu> {
         children: [
           RotatedBox(
               quarterTurns: 1,
-              child: Row(
-                  children: [
-                    for (var item in sideBarItems)
-                      Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Container(
-                              height: 30,
-                              width: 112,
-                              child: Column(
-                                  children: [
-                                    Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              item.icon!
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(item.title!)
-                                        ]
-                                    ),
-                                    Container(
-                                        height: 10,
-                                        width: double.infinity,
-                                        color: item.isTapped!
-                                            ? Color(0xff8A2627)
-                                            : Color(0xff3C3F41)
-                                    )
-                                  ]
-                              )
-                          )
-                      )
-                  ]
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  for (int index = 0; index < sideBarItems.length; index++)
+                    Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: GestureDetector(
+                            onTap: () => setState(() {
+                              tapped = index;
+                            }),
+                            child: Container(
+                                height: 31,
+                                width: 112,
+                                child: Column(
+                                    children: [
+                                      Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                                sideBarItems[index].icon!
+                                            ),
+                                            SizedBox(width: 5),
+                                            Text(sideBarItems[index].title!)
+                                          ]
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                          height: 10,
+                                          width: double.infinity,
+                                          color: tapped == index
+                                              ? Color(0xff8A2627)
+                                              : Color(0xff3C3F41)
+                                      )
+                                    ]
+                                )
+                            )
+                        )
+                    )
+                ],
               )
           ),
           Container(
@@ -164,34 +174,5 @@ class _SideMenuState extends State<SideMenu> {
             ],
         )
       ]
-  );
-}
-
-class DrawerListTile extends StatelessWidget {
-  const DrawerListTile({
-    Key? key,
-    required this.title,
-    required this.svgSrc,
-    required this.press,
-    this.isFolder = false,
-  }) : super(key: key);
-
-  final String title, svgSrc;
-  final VoidCallback press;
-  final bool isFolder;
-
-  @override
-  Widget build(BuildContext context) => ListTile(
-      onTap: press,
-      horizontalTitleGap: 0.0,
-      contentPadding: EdgeInsets.only(left: isFolder ? 10 : 20),
-      leading: SvgPicture.asset(
-          svgSrc,
-          height: 16
-      ),
-      title: Text(
-          title,
-          style: TextStyle(color: Colors.white54)
-      )
   );
 }

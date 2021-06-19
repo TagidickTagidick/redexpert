@@ -1,6 +1,6 @@
 class SideBarItem {
   final String? icon, title;
-  final bool? isTapped;
+  bool? isTapped;
   SideBarItem({
     this.icon,
     this.title,

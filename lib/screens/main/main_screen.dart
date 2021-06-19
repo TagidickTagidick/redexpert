@@ -1,4 +1,6 @@
 import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/models/side_bar_item.dart';
+import 'package:admin/models/tool_bar_item.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/batabaseConnect.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
@@ -7,11 +9,94 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'components/side_menu.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  double padding = 0.0;
+
+  Status status = Status.database;
+
+  List<SideBarItem> sideBarItems = [
+    SideBarItem(
+        icon: "assets/icons/connections.svg",
+        title: "Подключения",
+        isTapped: true
+    ),
+    SideBarItem(
+        icon: "assets/icons/drivers.svg",
+        title: "Драйверы",
+        isTapped: false
+    )
+  ];
+
+  List<ToolBarItem> toolBarItems = [
+    ToolBarItem(
+        status: Status.database,
+        text: "Подключение к базе данных",
+        child: [
+          ToolBarItem(
+              status: Status.folder,
+              text: "Favourites",
+              child: []
+          ),
+          ToolBarItem(
+              status: Status.connection,
+              text: "Новое подключение",
+              child: []
+          )
+        ]
+    ),
+    ToolBarItem(
+        status: Status.database,
+        text: "Подключение к базе данных",
+        child: [
+          ToolBarItem(
+              status: Status.folder,
+              text: "Favourites",
+              child: []
+          ),
+          ToolBarItem(
+              status: Status.connection,
+              text: "Новое подключение",
+              child: []
+          )
+        ]
+    )
+  ];
+
+  void reorderData(int oldindex, int newindex){
+    setState(() {
+      if(newindex>oldindex){
+        newindex -= 1;
+      }
+      final items = toolBarItems.removeAt(oldindex);
+      toolBarItems.insert(newindex, items);
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
       body: Column(
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 30,
+            child: Row(
+              children: [
+                menuText("Файл"),
+                menuText("Правка"),
+                menuText("Поиск"),
+                menuText("Вид"),
+                menuText("Базы данных"),
+                menuText("Инструменты"),
+                menuText("Поиск"),
+                menuText("Справка"),
+              ],
+            ),
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
@@ -50,17 +135,125 @@ class MainScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
             Expanded(
-                child: SideMenu()
+                child: Container(
+                    width: 300,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RotatedBox(
+                              quarterTurns: 1,
+                              child: Row(
+                                  children: [
+                                    for (var item in sideBarItems)
+                                      Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: GestureDetector(
+                                              onTap: () => setState(() {
+                                                item.isTapped = true;
+                                              }),
+                                              child: Container(
+                                                  height: 31,
+                                                  width: 112,
+                                                  child: Column(
+                                                      children: [
+                                                        Row(
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                  item.icon!
+                                                              ),
+                                                              SizedBox(width: 5),
+                                                              Text(item.title!)
+                                                            ]
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Container(
+                                                            height: 10,
+                                                            width: double.infinity,
+                                                            color: item.isTapped!
+                                                                ? Color(0xff8A2627)
+                                                                : Color(0xff3C3F41)
+                                                        )
+                                                      ]
+                                                  )
+                                              )
+                                          )
+                                      )
+                                  ]
+                              )
+                          ),
+                          Container(
+                              width: 274,
+                              height: MediaQuery.of(context).size.height - 200,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                        height: 25,
+                                        color: Color(0xff8A2627),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                            vertical: 5
+                                        ),
+                                        child: Row(
+                                            children: [
+                                              Text("Подключения"),
+                                              Spacer(),
+                                              SvgPicture.asset("assets/icons/exit.svg")
+                                            ]
+                                        )
+                                    ),
+                                    ReorderableListView(
+                                        shrinkWrap: true,
+                                        onReorder: reorderData,
+                                        children: [
+                                          for (int index = 0; index < toolBarItems.length; index++)
+                                            tree(toolBarItems[index], padding + 10, index)
+                                        ]
+                                    ),
+                                  ]
+                              )
+                          )
+                        ]
+                    )
+                )
             ),
-            DatabaseConnect()
+            windows(status)
             // Expanded(
             //     flex: 5,
             //     child: DashboardScreen()
             // )
-          ])),
+          ]
+                  )
+          ),
         ],
-      ));
-  Widget toolItem(String name, double size) => Container(
+      )
+  );
+
+  Widget windows(Status status) {
+    switch (status) {
+      case Status.database:
+        return DatabaseConnect();
+      case Status.folder:
+        return Container();
+      case Status.connection:
+        return Container();
+      default:
+        Container();
+    }
+    return Container();
+  }
+
+  Container menuText(String text) => Container(
+    padding: EdgeInsets.symmetric(horizontal: 10),
+    child: Text(
+        text,
+      style: TextStyle(
+        color: Colors.white
+      )
+    ),
+  );
+
+  Container toolItem(String name, double size) => Container(
         padding: EdgeInsets.only(left: 6, right: 6),
         child: SvgPicture.asset(
           'assets/icons/toolbar/$name.svg',
@@ -68,4 +261,76 @@ class MainScreen extends StatelessWidget {
           height: size,
         ),
       );
+
+  GestureDetector tree(ToolBarItem item, double padding, int index) => GestureDetector(
+    key: ValueKey(index),
+    onTap: () => setState(() => status = item.status!),
+    child: item.child!.length == 0
+        ? Container(
+        height: 25,
+        padding: EdgeInsets.only(
+            top: 5,
+            left: 5 + padding,
+            right: 5,
+            bottom: 5
+        ),
+        child: Row(
+            children: [
+              SvgPicture.asset(
+                  item.status == Status.database
+                      ? "assets/icons/database/database.svg"
+                      : item.status == Status.folder
+                      ? "assets/icons/database/folder.svg"
+                      : "assets/icons/database/connection.svg"
+              ),
+              SizedBox(width: 10),
+              Text(item.text!)
+            ]
+        )
+    )
+        : ExpansionTile(
+        tilePadding: EdgeInsets.symmetric(horizontal: 5 + padding),
+        leading: SvgPicture.asset(
+            item.status == Status.database
+                ? "assets/icons/toolbar/code.svg"
+                : item.status == Status.folder
+                ? "assets/icons/toolbar/code.svg"
+                : "assets/icons/toolbar/code.svg"
+        ),
+        title: Text(item.text!),
+        children: [
+          for (int i = 0; i < item.child!.length; i++)
+            tree(item.child![i], padding + 10, i + 10 * index)
+        ]
+    )
+  );
+}
+
+class DrawerListTile extends StatelessWidget {
+  const DrawerListTile({
+    Key? key,
+    required this.title,
+    required this.svgSrc,
+    required this.press,
+    this.isFolder = false,
+  }) : super(key: key);
+
+  final String title, svgSrc;
+  final VoidCallback press;
+  final bool isFolder;
+
+  @override
+  Widget build(BuildContext context) => ListTile(
+      onTap: press,
+      horizontalTitleGap: 0.0,
+      contentPadding: EdgeInsets.only(left: isFolder ? 10 : 20),
+      leading: SvgPicture.asset(
+          svgSrc,
+          height: 16
+      ),
+      title: Text(
+          title,
+          style: TextStyle(color: Colors.white54)
+      )
+  );
 }
