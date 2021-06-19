@@ -14,8 +14,8 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 1000,
-        height: 600,
+        width: MediaQuery.of(context).size.width * 0.7,
+        height: MediaQuery.of(context).size.height * 0.9,
         color: secondaryColor,
         child: Container(
           padding: const EdgeInsets.all(16.0),
