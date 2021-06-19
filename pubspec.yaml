@@ -51,6 +51,9 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/database/
+    - assets/icons/search/
+    - assets/icons/databaseToolBar/
     - assets/icons/toolbar/
   #   - images/a_dot_ham.jpeg
 
