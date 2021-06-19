@@ -20,15 +20,15 @@ class Header extends StatelessWidget {
             icon: Icon(Icons.menu),
             onPressed: context.read<MenuController>().controlMenu,
           ),
-        if (!Responsive.isMobile(context))
-          Text(
-            "Dashboard",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        if (!Responsive.isMobile(context))
-          Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        Expanded(child: SearchField()),
-        ProfileCard()
+        // if (!Responsive.isMobile(context))
+        //   Text(
+        //     "Dashboard",
+        //     style: Theme.of(context).textTheme.headline6,
+        //   ),
+        // if (!Responsive.isMobile(context))
+        //   Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
+        // Expanded(child: SearchField()),
+        // ProfileCard()
       ],
     );
   }

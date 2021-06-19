@@ -10,10 +10,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Admin Panel',
       theme: ThemeData.dark().copyWith(
@@ -23,13 +21,12 @@ class MyApp extends StatelessWidget {
         canvasColor: secondaryColor,
       ),
       home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuController(),
-          ),
-        ],
-        child: MainScreen(),
-      ),
-    );
-  }
+          providers: [
+            ChangeNotifierProvider(
+              create: (context) => MenuController()
+            )
+          ],
+          child: MainScreen()
+      )
+  );
 }
