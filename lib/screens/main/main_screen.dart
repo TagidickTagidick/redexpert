@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'components/side_menu.dart';
+import '../../models/menu_item.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -18,6 +19,8 @@ class _MainScreenState extends State<MainScreen> {
   double padding = 0.0;
 
   Status status = Status.database;
+
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   List<SideBarItem> sideBarItems = [
     SideBarItem(
@@ -77,8 +80,40 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  List<MenuItem> menuItems = [
+    MenuItem(
+      text: "Файл",
+      items: [
+        "Создать",
+        "Открыть",
+        "Недавние файлы",
+        "Сохранить",
+        "Сохранить как",
+        "Печать",
+        "Свойства печати",
+        "Предварительный просмотр",
+        "Выход"
+      ]
+    ),
+    MenuItem(
+        text: "Правка",
+        items: [
+          "Отмена действия",
+          "Возврат отмененного действия",
+          "Недавние файлы",
+          "Сохранить",
+          "Сохранить как",
+          "Печать",
+          "Свойства печати",
+          "Предварительный просмотр",
+          "Выход"
+        ]
+    )
+  ];
+
   @override
   Widget build(BuildContext context) => Scaffold(
+    key: _scaffoldkey,
       body: Column(
         children: [
           Container(
@@ -86,6 +121,19 @@ class _MainScreenState extends State<MainScreen> {
             height: 30,
             child: Row(
               children: [
+                // PopupMenuButton(
+                //   padding: EdgeInsets.zero,
+                //   // initialValue: choices[_selection],
+                //   itemBuilder: (BuildContext context) {
+                //     return choices.map((String choice) {
+                //       return  PopupMenuItem<String>(
+                //         value: choice,
+                //         child: Text(text),
+                //       );
+                //     }
+                //     ).toList();
+                //   },
+                // ),
                 menuText("Файл"),
                 menuText("Правка"),
                 menuText("Поиск"),
