@@ -1,3 +1,4 @@
+import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_bar_item.dart';
 import 'package:admin/models/tool_bar_item.dart';
@@ -108,8 +109,45 @@ class _MainScreenState extends State<MainScreen> {
           "Предварительный просмотр",
           "Выход"
         ]
-    )
+    ),
+    MenuItem(
+        text: "Поиск",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Вид",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Базы данных",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Инструменты",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Поиск",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Справка",
+        items: [
+          "Выход"
+        ]
+    ),
   ];
+  var _selection = 0;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -119,35 +157,20 @@ class _MainScreenState extends State<MainScreen> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
+            color: secondaryColor,
             child: Row(
               children: [
-                // PopupMenuButton(
-                //   padding: EdgeInsets.zero,
-                //   // initialValue: choices[_selection],
-                //   itemBuilder: (BuildContext context) {
-                //     return choices.map((String choice) {
-                //       return  PopupMenuItem<String>(
-                //         value: choice,
-                //         child: Text(text),
-                //       );
-                //     }
-                //     ).toList();
-                //   },
-                // ),
-                menuText("Файл"),
-                menuText("Правка"),
-                menuText("Поиск"),
-                menuText("Вид"),
-                menuText("Базы данных"),
-                menuText("Инструменты"),
-                menuText("Поиск"),
-                menuText("Справка"),
+                Container(padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: SvgPicture.asset('assets/icons/logo.svg')),
+                for (var itm in menuItems) menuText(itm)
               ],
             ),
           ),
+          SizedBox(height: 1),
           Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
+            color: secondaryColor,
             child: Row(
               children: [
                 toolItem('createfile', 16),
@@ -250,7 +273,28 @@ class _MainScreenState extends State<MainScreen> {
                                             ]
                                         )
                                     ),
-                                    ReorderableListView(
+                                    Container(
+                                      height: 25,
+                                        color: Color(0xff323536),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                            vertical: 5
+                                        ),
+                                  child: Row(
+                                    children: [
+                                      databaseToolBar('connection', 15),
+                                      databaseToolBar('databaseAdd', 15),
+                                      databaseToolBar('newFolder', 15),
+                                      databaseToolBar('database', 15),
+                                      databaseToolBar('up', 15),
+                                      databaseToolBar('down', 15),
+                                      databaseToolBar('refresh', 15),
+                                      databaseToolBar('alphabet', 15),
+                                      databaseToolBar('delete', 15),
+                                    ],
+                                  ),
+                                ),
+                                ReorderableListView(
                                         shrinkWrap: true,
                                         onReorder: reorderData,
                                         children: [
@@ -266,16 +310,20 @@ class _MainScreenState extends State<MainScreen> {
                 )
             ),
             windows(status)
-            // Expanded(
-            //     flex: 5,
-            //     child: DashboardScreen()
-            // )
           ]
                   )
           ),
         ],
       )
   );
+  Widget databaseToolBar(String name, double size) => Container(
+        padding: EdgeInsets.only(left: 7, right: 7),
+        child: SvgPicture.asset(
+          'assets/icons/databaseToolBar/$name.svg',
+          width: size,
+          height: size,
+        ),
+      );
 
   Widget windows(Status status) {
     switch (status) {
@@ -291,15 +339,26 @@ class _MainScreenState extends State<MainScreen> {
     return Container();
   }
 
-  Container menuText(String text) => Container(
+  Container menuText(MenuItem item) => Container(
     padding: EdgeInsets.symmetric(horizontal: 10),
-    child: Text(
-        text,
-      style: TextStyle(
-        color: Colors.white
-      )
-    ),
-  );
+    child: PopupMenuButton(
+      padding: EdgeInsets.all(0),
+      icon: Container(width: 100,child: Text(item.text!, style: TextStyle(fontSize: 10))),
+          initialValue: item.text,
+          itemBuilder: (BuildContext context) {
+            return item.items!.map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                height: 16,
+                child: Container(
+                  width: 100,
+                  child: Text(choice, style: TextStyle(color: Colors.white))),
+                onTap: () {},
+              );
+            }).toList();
+          },
+        ),
+      );
 
   Container toolItem(String name, double size) => Container(
         padding: EdgeInsets.only(left: 6, right: 6),
