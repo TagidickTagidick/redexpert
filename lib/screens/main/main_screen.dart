@@ -147,7 +147,6 @@ class _MainScreenState extends State<MainScreen> {
         ]
     ),
   ];
-  var _selection = 0;
 
   @override
   Widget build(BuildContext context) => Scaffold(

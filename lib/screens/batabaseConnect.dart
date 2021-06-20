@@ -26,12 +26,12 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
             children: [
               Text(
                 'Подключение к базе данных',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 22),
               ),
               SizedBox(height: 16),
               Text(
                 'Параметры подключения определенные пользователем',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 14),
               ),
               Container(
                 width: 450,
@@ -46,7 +46,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                           onPressed: null,
                           child: Text(
                             'Новое подключение',
-                            style: TextStyle(fontSize: 14, color: textColor),
+                            style: TextStyle(fontSize: 12, color: textColor),
                           ),
                         )),
                     Expanded(
