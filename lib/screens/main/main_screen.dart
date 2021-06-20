@@ -1,3 +1,4 @@
+import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_bar_item.dart';
 import 'package:admin/models/tool_bar_item.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'components/side_menu.dart';
 import '../../models/menu_item.dart';
-import '../baseDatabaseConnection.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -109,7 +109,43 @@ class _MainScreenState extends State<MainScreen> {
           "Предварительный просмотр",
           "Выход"
         ]
-    )
+    ),
+    MenuItem(
+        text: "Поиск",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Вид",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Базы данных",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Инструменты",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Поиск",
+        items: [
+          "Выход"
+        ]
+    ),
+    MenuItem(
+        text: "Справка",
+        items: [
+          "Выход"
+        ]
+    ),
   ];
 
   @override
@@ -120,35 +156,20 @@ class _MainScreenState extends State<MainScreen> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
+            color: secondaryColor,
             child: Row(
               children: [
-                // PopupMenuButton(
-                //   padding: EdgeInsets.zero,
-                //   // initialValue: choices[_selection],
-                //   itemBuilder: (BuildContext context) {
-                //     return choices.map((String choice) {
-                //       return  PopupMenuItem<String>(
-                //         value: choice,
-                //         child: Text(text),
-                //       );
-                //     }
-                //     ).toList();
-                //   },
-                // ),
-                menuText("Файл"),
-                menuText("Правка"),
-                menuText("Поиск"),
-                menuText("Вид"),
-                menuText("Базы данных"),
-                menuText("Инструменты"),
-                menuText("Поиск"),
-                menuText("Справка"),
+                Container(padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: SvgPicture.asset('assets/icons/logo.svg')),
+                for (var itm in menuItems) menuText(itm)
               ],
             ),
           ),
+          SizedBox(height: 1),
           Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
+            color: secondaryColor,
             child: Row(
               children: [
                 toolItem('createfile', 16),
@@ -183,105 +204,132 @@ class _MainScreenState extends State<MainScreen> {
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                            width: 305,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  RotatedBox(
-                                      quarterTurns: 1,
-                                      child: Row(
-                                          children: [
-                                            for (var item in sideBarItems)
-                                              Padding(
-                                                  padding: EdgeInsets.only(left: 10),
-                                                  child: GestureDetector(
-                                                      onTap: () => setState(() {
-                                                        item.isTapped = true;
-                                                      }),
-                                                      child: Container(
-                                                          height: 31,
-                                                          width: 112,
-                                                          child: Column(
-                                                              children: [
-                                                                Row(
-                                                                    children: [
-                                                                      SvgPicture.asset(
-                                                                          item.icon!
-                                                                      ),
-                                                                      SizedBox(width: 5),
-                                                                      Text(item.title!)
-                                                                    ]
-                                                                ),
-                                                                SizedBox(height: 5),
-                                                                Container(
-                                                                    height: 10,
-                                                                    width: double.infinity,
-                                                                    color: item.isTapped!
-                                                                        ? Color(0xff8A2627)
-                                                                        : Color(0xff3C3F41)
-                                                                )
-                                                              ]
-                                                          )
-                                                      )
+            Expanded(
+                child: Container(
+                     width: MediaQuery.of(context).size.width * 0.7,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RotatedBox(
+                              quarterTurns: 1,
+                              child: Row(
+                                  children: [
+                                    for (var item in sideBarItems)
+                                      Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: GestureDetector(
+                                              onTap: () => setState(() {
+                                                item.isTapped = true;
+                                              }),
+                                              child: Container(
+                                                  height: 31,
+                                                  width: 112,
+                                                  child: Column(
+                                                      children: [
+                                                        Row(
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                  item.icon!
+                                                              ),
+                                                              SizedBox(width: 5),
+                                                              Text(item.title!)
+                                                            ]
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Container(
+                                                            height: 10,
+                                                            width: double.infinity,
+                                                            color: item.isTapped!
+                                                                ? Color(0xff8A2627)
+                                                                : Color(0xff3C3F41)
+                                                        )
+                                                      ]
                                                   )
                                               )
-                                          ]
+                                          )
                                       )
+                                  ]
+                              )
+                          ),
+                          Container(
+                              width: 274,
+                              height: MediaQuery.of(context).size.height - 200,
+                              child: Column(
+                                  children: [
+                                    Container(
+                                        height: 25,
+                                        color: Color(0xff8A2627),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                            vertical: 5
+                                        ),
+                                        child: Row(
+                                            children: [
+                                              Text("Подключения"),
+                                              Spacer(),
+                                              SvgPicture.asset("assets/icons/exit.svg")
+                                            ]
+                                        )
+                                    ),
+                                    Container(
+                                      height: 25,
+                                        color: Color(0xff323536),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                            vertical: 5
+                                        ),
+                                  child: Row(
+                                    children: [
+                                      databaseToolBar('connection', 15),
+                                      databaseToolBar('databaseAdd', 15),
+                                      databaseToolBar('newFolder', 15),
+                                      databaseToolBar('database', 15),
+                                      databaseToolBar('up', 15),
+                                      databaseToolBar('down', 15),
+                                      databaseToolBar('refresh', 15),
+                                      databaseToolBar('alphabet', 15),
+                                      databaseToolBar('delete', 15),
+                                    ],
                                   ),
-                                  Container(
-                                      width: 274,
-                                      height: MediaQuery.of(context).size.height - 200,
-                                      child: Column(
-                                          children: [
-                                            Container(
-                                                height: 25,
-                                                color: Color(0xff8A2627),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 5,
-                                                    vertical: 5
-                                                ),
-                                                child: Row(
-                                                    children: [
-                                                      Text("Подключения"),
-                                                      Spacer(),
-                                                      SvgPicture.asset("assets/icons/exit.svg")
-                                                    ]
-                                                )
-                                            ),
-                                            ReorderableListView(
-                                                shrinkWrap: true,
-                                                onReorder: reorderData,
-                                                children: [
-                                                  for (int index = 0; index < toolBarItems.length; index++)
-                                                    tree(toolBarItems[index], padding + 10, index)
-                                                ]
-                                            ),
-                                          ]
-                                      )
-                                  )
-                                ]
-                            )
-                        ),
+                                ),
+                                ReorderableListView(
+                                        shrinkWrap: true,
+                                        onReorder: reorderData,
+                                        children: [
+                                          for (int index = 0; index < toolBarItems.length; index++)
+                                            tree(toolBarItems[index], padding + 10, index)
+                                        ]
+                                    ),
+                                  ]
+                              )
+                          )
+                        ]
+                    )
+                )
+            ),
             windows(status)
-            // Expanded(
-            //     flex: 5,
-            //     child: DashboardScreen()
-            // )
           ]
                   )
           ),
         ],
       )
   );
+  Widget databaseToolBar(String name, double size) => Container(
+        padding: EdgeInsets.only(left: 7, right: 7),
+        child: SvgPicture.asset(
+          'assets/icons/databaseToolBar/$name.svg',
+          width: size,
+          height: size,
+        ),
+      );
 
   Widget windows(Status status) {
     switch (status) {
       case Status.database:
         return DatabaseConnect();
       case Status.folder:
-        return BaseDatabaseConnect();
+        return Container();
       case Status.connection:
         return Container();
       default:
@@ -290,15 +338,26 @@ class _MainScreenState extends State<MainScreen> {
     return Container();
   }
 
-  Container menuText(String text) => Container(
+  Container menuText(MenuItem item) => Container(
     padding: EdgeInsets.symmetric(horizontal: 10),
-    child: Text(
-        text,
-      style: TextStyle(
-        color: Colors.white
-      )
-    ),
-  );
+    child: PopupMenuButton(
+      padding: EdgeInsets.all(0),
+      icon: Container(width: 100,child: Text(item.text!, style: TextStyle(fontSize: 10))),
+          initialValue: item.text,
+          itemBuilder: (BuildContext context) {
+            return item.items!.map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                height: 16,
+                child: Container(
+                  width: 100,
+                  child: Text(choice, style: TextStyle(color: Colors.white))),
+                onTap: () {},
+              );
+            }).toList();
+          },
+        ),
+      );
 
   Container toolItem(String name, double size) => Container(
         padding: EdgeInsets.only(left: 6, right: 6),
