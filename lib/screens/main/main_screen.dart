@@ -129,19 +129,29 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     TreeViewTheme _treeViewTheme = TreeViewTheme(
+
+      verticalSpacing: 4,
       labelStyle: TextStyle(
-        fontSize: 16,
+        fontSize: 13,
         letterSpacing: 0.3,
       ),
+      horizontalSpacing: 26,
+      iconPadding: 20,
+
+      expanderTheme: ExpanderThemeData(
+          modifier: ExpanderModifier.squareOutlined,
+          size: 12,
+          color: Color(0xFFF0F0F0),
+          type: ExpanderType.plusMinus),
       parentLabelStyle: TextStyle(
-        fontSize: 16,
+
+        fontSize: 14,
         letterSpacing: 0.1,
-        fontWeight: FontWeight.w800,
         color: Colors.white,
       ),
       iconTheme: IconThemeData(
-        size: 18,
-        color: Colors.white,
+        size: 22,
+        color: Color(0xFFF0F0F0),
       ),
       colorScheme: Theme.of(context).colorScheme,
     );
