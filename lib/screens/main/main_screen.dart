@@ -3,6 +3,7 @@ import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_bar_item.dart';
 import 'package:admin/models/tool_bar_item.dart';
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/baseDatabaseConnection.dart';
 import 'package:admin/screens/batabaseConnect.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -329,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
       case Status.database:
         return DatabaseConnect();
       case Status.folder:
-        return Container();
+        return BaseDatabaseConnect();
       case Status.connection:
         return Container();
       default:
@@ -338,11 +339,16 @@ class _MainScreenState extends State<MainScreen> {
     return Container();
   }
 
-  Container menuText(MenuItem item) => Container(
+  Padding menuText(MenuItem item) => Padding(
     padding: EdgeInsets.symmetric(horizontal: 10),
     child: PopupMenuButton(
       padding: EdgeInsets.all(0),
-      icon: Container(width: 100,child: Text(item.text!, style: TextStyle(fontSize: 10))),
+      child: Container(
+        height: 20,
+        child: Text(
+            item.text!
+        ),
+      ),
           initialValue: item.text,
           itemBuilder: (BuildContext context) {
             return item.items!.map((String choice) {
