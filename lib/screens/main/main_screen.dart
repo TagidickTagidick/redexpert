@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'components/side_menu.dart';
 import '../../models/menu_item.dart';
+import '../baseDatabaseConnection.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -182,89 +183,87 @@ class _MainScreenState extends State<MainScreen> {
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-            Expanded(
-                child: Container(
-                     width: MediaQuery.of(context).size.width * 0.7,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RotatedBox(
-                              quarterTurns: 1,
-                              child: Row(
-                                  children: [
-                                    for (var item in sideBarItems)
-                                      Padding(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: GestureDetector(
-                                              onTap: () => setState(() {
-                                                item.isTapped = true;
-                                              }),
-                                              child: Container(
-                                                  height: 31,
-                                                  width: 112,
-                                                  child: Column(
-                                                      children: [
-                                                        Row(
-                                                            children: [
-                                                              SvgPicture.asset(
-                                                                  item.icon!
-                                                              ),
-                                                              SizedBox(width: 5),
-                                                              Text(item.title!)
-                                                            ]
-                                                        ),
-                                                        SizedBox(height: 5),
-                                                        Container(
-                                                            height: 10,
-                                                            width: double.infinity,
-                                                            color: item.isTapped!
-                                                                ? Color(0xff8A2627)
-                                                                : Color(0xff3C3F41)
-                                                        )
-                                                      ]
+                        Container(
+                            width: 305,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RotatedBox(
+                                      quarterTurns: 1,
+                                      child: Row(
+                                          children: [
+                                            for (var item in sideBarItems)
+                                              Padding(
+                                                  padding: EdgeInsets.only(left: 10),
+                                                  child: GestureDetector(
+                                                      onTap: () => setState(() {
+                                                        item.isTapped = true;
+                                                      }),
+                                                      child: Container(
+                                                          height: 31,
+                                                          width: 112,
+                                                          child: Column(
+                                                              children: [
+                                                                Row(
+                                                                    children: [
+                                                                      SvgPicture.asset(
+                                                                          item.icon!
+                                                                      ),
+                                                                      SizedBox(width: 5),
+                                                                      Text(item.title!)
+                                                                    ]
+                                                                ),
+                                                                SizedBox(height: 5),
+                                                                Container(
+                                                                    height: 10,
+                                                                    width: double.infinity,
+                                                                    color: item.isTapped!
+                                                                        ? Color(0xff8A2627)
+                                                                        : Color(0xff3C3F41)
+                                                                )
+                                                              ]
+                                                          )
+                                                      )
                                                   )
                                               )
-                                          )
+                                          ]
                                       )
-                                  ]
-                              )
-                          ),
-                          Container(
-                              width: 274,
-                              height: MediaQuery.of(context).size.height - 200,
-                              child: Column(
-                                  children: [
-                                    Container(
-                                        height: 25,
-                                        color: Color(0xff8A2627),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 5,
-                                            vertical: 5
-                                        ),
-                                        child: Row(
-                                            children: [
-                                              Text("Подключения"),
-                                              Spacer(),
-                                              SvgPicture.asset("assets/icons/exit.svg")
-                                            ]
-                                        )
-                                    ),
-                                    ReorderableListView(
-                                        shrinkWrap: true,
-                                        onReorder: reorderData,
-                                        children: [
-                                          for (int index = 0; index < toolBarItems.length; index++)
-                                            tree(toolBarItems[index], padding + 10, index)
-                                        ]
-                                    ),
-                                  ]
-                              )
-                          )
-                        ]
-                    )
-                )
-            ),
+                                  ),
+                                  Container(
+                                      width: 274,
+                                      height: MediaQuery.of(context).size.height - 200,
+                                      child: Column(
+                                          children: [
+                                            Container(
+                                                height: 25,
+                                                color: Color(0xff8A2627),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 5,
+                                                    vertical: 5
+                                                ),
+                                                child: Row(
+                                                    children: [
+                                                      Text("Подключения"),
+                                                      Spacer(),
+                                                      SvgPicture.asset("assets/icons/exit.svg")
+                                                    ]
+                                                )
+                                            ),
+                                            ReorderableListView(
+                                                shrinkWrap: true,
+                                                onReorder: reorderData,
+                                                children: [
+                                                  for (int index = 0; index < toolBarItems.length; index++)
+                                                    tree(toolBarItems[index], padding + 10, index)
+                                                ]
+                                            ),
+                                          ]
+                                      )
+                                  )
+                                ]
+                            )
+                        ),
             windows(status)
             // Expanded(
             //     flex: 5,
@@ -282,7 +281,7 @@ class _MainScreenState extends State<MainScreen> {
       case Status.database:
         return DatabaseConnect();
       case Status.folder:
-        return Container();
+        return BaseDatabaseConnect();
       case Status.connection:
         return Container();
       default:

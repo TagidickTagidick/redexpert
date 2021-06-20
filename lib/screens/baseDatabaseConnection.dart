@@ -9,145 +9,289 @@ class BaseDatabaseConnect extends StatefulWidget {
 }
 
 class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
+  bool names = true, api = false, password = false, password1 = false;
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.7,
-        height: MediaQuery.of(context).size.height * 0.9,
-        color: secondaryColor,
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Подключение к базе данных',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 16),
-              Text(
-                'Параметры подключения определенные пользователем',
-                style: TextStyle(fontSize: 16),
-              ),
-              Container(
-                width: 450,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                        width: 180,
-                        color: Color(0xFF46494A),
-                        child: FlatButton(
-                          onPressed: null,
-                          child: Text(
-                            'Новое подключение',
-                            style: TextStyle(fontSize: 14, color: textColor),
+  Widget build(BuildContext context) => Column(
+    children: [
+      Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Container(
+            width: 1100,
+            height: 500,
+            color: secondaryColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 25,
+                  color: Color(0xff2B2B2B),
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            height: 25,
+                            width: 120,
+                            color: Color(0xff3C3F41),
+                            alignment: Alignment.center,
+                            child: Text(
+                                "Базовые"
+                            )
+                        ),
+                        Opacity(
+                          opacity: 0.5,
+                          child: Container(
+                              height: 25,
+                              width: 120,
+                              color: Color(0xff3C3F41),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  "Расширенные"
+                              )
                           ),
-                        )),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    Container(
-                        width: 180,
-                        color: Color(0xFF46494A),
-                        child: FlatButton(
-                          onPressed: null,
-                          child: Text(
-                            'Создать базу данных',
-                            style: TextStyle(fontSize: 14, color: textColor),
-                          ),
-                        )),
-                  ],
+                        ),
+                        Opacity(
+                            opacity: 0.5,
+                            child: Container(
+                                height: 25,
+                                width: 120,
+                                color: Color(0xff3C3F41),
+                                alignment: Alignment.center,
+                                child: Text(
+                                    "SSH Тоннель"
+                                )
+                            )
+                        )
+                      ]
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Доступные подключения',
-                style: TextStyle(fontSize: 14, color: textColor),
-              ),
-              Container(
-                width: 980,
-                height: 30,
-                color: Color(0xFF46494A),
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 20,
-                      child: Text(' '),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Имя подключения'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Сервер'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Путь к базе данных'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Пользователь'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Драйвер'),
-                    ),
-                  ],
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: Container(
+                                    width: 200,
+                                    child: Text("Состояние:"),
+                                  ),
+                                  title: Text("Не подключено"),
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Имя подключения:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Имя сервера:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Порт:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Файл базы данных:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Кодировка:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                  leading: Checkbox(
+                                    value: names,
+                                    activeColor: Colors.transparent,
+                                    onChanged: (value) => setState(() => names = value!),
+                                  ),
+                                  title: Text("Приводить имена объектов к верхнему регистру"),
+                                ),
+                                ListTile(
+                                  leading: Checkbox(
+                                    value: api,
+                                    activeColor: Colors.transparent,
+                                    onChanged: (value) => setState(() => api = value!),
+                                  ),
+                                  title: Text("Использовать новое OO API (Позволяет использовать пакетные операции в генераторе данных)"),
+                                )
+                              ],
+                            )
+                        ),
+                        Expanded(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("JDBC Драйвер:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Параметры подключения:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Аутентификация:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                        width: 200,
+                                        child: Text("Роль:")
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Имя пользователя:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                ListTile(
+                                    leading: Container(
+                                      width: 200,
+                                      child: Text("Пароль:"),
+                                    ),
+                                    title: Opacity(
+                                        opacity: 0.1,
+                                        child: Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          color: Color(0xffFFFFFF),
+                                        )
+                                    )
+                                ),
+                                Row(
+                                    children: [
+                                      Checkbox(
+                                        value: password,
+                                        activeColor: Colors.transparent,
+                                        onChanged: (value) => setState(() => password = value!),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text("Сохранить пароль"),
+                                      SizedBox(width: 10),
+                                      Checkbox(
+                                        value: password,
+                                        activeColor: Colors.transparent,
+                                        onChanged: (value) => setState(() => password = value!),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text("Сохранить пароль"),
+                                      Spacer(),
+                                      Text(
+                                        "Показать пароль",
+                                        style: TextStyle(
+                                            color: Color(0xffFF4F4F)
+                                        ),
+                                      )
+                                    ]
+                                )
+                              ],
+                            )
+                        )
+                      ],
+                    )
                 ),
-              ),
-              Container(
-                width: 980,
-                height: 30,
-                color: Color(0xFF535657),
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 20,
-                      child: Text(' '),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Новое подключение'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('localhost'),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text(''),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text(''),
-                    ),
-                    VerticalDivider(),
-                    Expanded(
-                      child: Text('Jaybird 3 Driver'),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 980,
-                height: 150,
-                color: Color(0xFF46494A),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+
+              ],
+            ),
+          )
+      )
+    ],
+  );
 }
