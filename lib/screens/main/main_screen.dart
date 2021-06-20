@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
-  String? _selectedNode;
+  String _selectedNode = "База данных";
   bool docsOpen = true;
   List<Node>? _nodes;
   TreeViewController? _treeViewController;
@@ -102,22 +102,22 @@ class _MainScreenState extends State<MainScreen> {
     _nodes = [
       Node(
         label: 'Подключение к базе данных',
-        key: 'docs',
+        key: 'База данных',
         expanded: docsOpen,
         icon: Icons.input,
         children: [
           Node(
             label: 'Favourites',
-            key: 'd1',
+            key: 'Папка',
             icon: Icons.folder_open,
           ),
           Node(
               label: 'Новое подключение',
-              key: 'd2',
+              key: 'Подключение',
               icon: Icons.insert_drive_file
           )
-        ],
-      ),
+        ]
+      )
     ];
     _treeViewController = TreeViewController(
       children: _nodes!,
@@ -307,9 +307,11 @@ class _MainScreenState extends State<MainScreen> {
                                                   debugPrint('Selected: $key');
                                                   setState(() {
                                                     _selectedNode = key;
+                                                    print(_selectedNode);
                                                     _treeViewController =
                                                         _treeViewController!.copyWith(
-                                                            selectedKey: key);
+                                                            selectedKey: key
+                                                        );
                                                   });
                                                 },
                                                 theme: _treeViewTheme,
@@ -328,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: Container(
                                   padding: const EdgeInsets.all(8.0),
                                   color: bgColor,
-                                  child: windows(status),
+                                  child: windows(_selectedNode),
                                 )),
                           ],
                         )
@@ -349,13 +351,13 @@ class _MainScreenState extends State<MainScreen> {
         ),
       );
 
-  Widget windows(Status status) {
-    switch (status) {
-      case Status.database:
+  Widget windows(String _selectedNode) {
+    switch (_selectedNode) {
+      case "База данных":
         return DatabaseConnect();
-      case Status.folder:
+      case "Папка":
         return BaseDatabaseConnect();
-      case Status.connection:
+      case "Подключение":
         return CreateDatabase();
       default:
         Container();
