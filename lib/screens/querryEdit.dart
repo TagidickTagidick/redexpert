@@ -47,11 +47,23 @@ class _QuerryState extends State<Querry> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(5.0),
-                      width: 100,
+                      width: 110,
                       child: Text('Подключение'),
                     ),
                     SizedBox(width: 5),
-                    Container(width: 150, height: 22, color: Color(0xFF818181)),
+                    Container(
+                      width: 140,
+                      height: 22,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF818181),
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )),
+                          child: Icon(Icons.arrow_drop_down,size: 16),
+                    ),
                     VerticalDivider(),
                   ],
                 ),
