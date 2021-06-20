@@ -69,6 +69,7 @@ class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                             child: Column(

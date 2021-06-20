@@ -5,6 +5,7 @@ import 'package:admin/models/tool_bar_item.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/baseDatabaseConnection.dart';
 import 'package:admin/screens/batabaseConnect.dart';
+import 'package:admin/screens/createDatabase.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -332,7 +333,7 @@ class _MainScreenState extends State<MainScreen> {
       case Status.folder:
         return BaseDatabaseConnect();
       case Status.connection:
-        return Container();
+        return CreateDatabase();
       default:
         Container();
     }
