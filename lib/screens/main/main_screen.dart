@@ -158,6 +158,74 @@ class _MainScreenState extends State<MainScreen> {
       //colorScheme: Theme.of(context).colorScheme,
     );
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          color: Color(0xFF3C3F41),
+          height: 20,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+              children: [
+                Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('Не подключено',
+                        style:
+                            TextStyle(fontSize: 12, color: Color(0xFFA3A3A3)))),
+                VerticalDivider(color: bgColor),
+                Expanded(flex: 1, child: Container()),
+                VerticalDivider(color: bgColor),
+                Expanded(flex: 1, child: Container()),
+                VerticalDivider(color: bgColor),
+                Container(
+                    width: 200,
+                    alignment: Alignment.center,
+                    child: Text('JDK 16.0',
+                        style:
+                            TextStyle(fontSize: 12, color: Color(0xFFA3A3A3)))),
+                VerticalDivider(color: bgColor),
+                Container(
+                    width: 200,
+                    alignment: Alignment.center,
+                    child: Text('Вы не авторизованы',
+                        style:
+                            TextStyle(fontSize: 12, color: Color(0xFFA3A3A3)))),
+                VerticalDivider(color: bgColor),
+                Container(
+                  width: 200,
+                  height: 20,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        width: 200,
+                        height: 20,
+                        color: Color(0xFF444749),
+                      ),
+                      Container(
+                        width: 120,
+                        height: 20,
+                        color: Color(0xFF8A2627),
+                      ),
+                      Center(
+                        child: Text('21 / 38 mb',style:
+                            TextStyle(fontSize: 12, color: Color(0xFFA3A3A3)),
+                      ),),
+                    ],
+                  ),
+                ),
+                VerticalDivider(color: bgColor),
+                Container(
+                  width: 20,
+                  height: 20,
+                  alignment: Alignment.center,
+                    color: Color(0xFF3C3F41),
+                    child: SvgPicture.asset(
+                        'assets/icons/databaseToolBar/database.svg')),
+              ],
+            )
+        ),
+      ),
       key: _scaffoldkey,
       body: SingleChildScrollView(
         child: SafeArea(
