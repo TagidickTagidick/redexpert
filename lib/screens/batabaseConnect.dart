@@ -1,6 +1,7 @@
 import 'package:admin/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DatabaseConnect extends StatefulWidget {
   const DatabaseConnect({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class DatabaseConnect extends StatefulWidget {
 
 class _DatabaseConnectState extends State<DatabaseConnect> {
   var textStyle = TextStyle(fontSize: 14, color: textColor, fontWeight: FontWeight.w100);
+  var textStyle1 = TextStyle(fontSize: 12, color: textColor, fontWeight: FontWeight.w100);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +20,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.7,
         height: MediaQuery.of(context).size.height * 0.85,
-        color: secondaryColor,
+        color: Color(0xFF3C3F41),
         child: Container(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -116,27 +118,27 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                   children: [
                     Container(
                       width: 20,
-                      child: Text(' '),
+                      child: SvgPicture.asset('assets/icons/databaseToolBar/connection.svg', width: 20, height: 20, color: Colors.white,),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Новое подключение'),
+                      child: Text('Новое подключение', style: textStyle1, textAlign: TextAlign.center),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('localhost'),
+                      child: Text('localhost', style: textStyle1),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text(''),
+                      child: Text('', style: textStyle1),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text(''),
+                      child: Text('', style: textStyle1),
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Jaybird 3 Driver'),
+                      child: Text('Jaybird 3 Driver', style: textStyle1),
                     ),
                   ],
                 ),

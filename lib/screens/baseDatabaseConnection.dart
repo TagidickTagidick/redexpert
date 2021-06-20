@@ -164,7 +164,7 @@ class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
                                     activeColor: Colors.transparent,
                                     onChanged: (value) => setState(() => names = value!),
                                   ),
-                                  title: Text("Приводить имена объектов к верхнему регистру"),
+                                  title: Text("Приводить имена объектов к верхнему регистру", style: TextStyle(fontSize: 12),),
                                 ),
                                 ListTile(
                                   leading: Checkbox(
@@ -172,7 +172,7 @@ class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
                                     activeColor: Colors.transparent,
                                     onChanged: (value) => setState(() => api = value!),
                                   ),
-                                  title: Text("Использовать новое OO API (Позволяет использовать пакетные операции в генераторе данных)"),
+                                  title: Text("Использовать новое OO API (Позволяет использовать пакетные операции в генераторе данных)", style: TextStyle(fontSize: 12)),
                                 )
                               ],
                             )

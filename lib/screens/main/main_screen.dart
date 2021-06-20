@@ -9,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../models/menu_item.dart';
 import 'package:flutter_treeview/flutter_treeview.dart';
 
+import '../querryEdit.dart';
+
 class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -92,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
     MenuItem(text: "Поиск", items: ["Выход"]),
     MenuItem(text: "Вид", items: ["Выход"]),
     MenuItem(text: "Базы данных", items: ["Выход"]),
-    MenuItem(text: "Инструменты", items: ["Выход"]),
+    MenuItem(text: "Инструменты", items: ["Редактор запросов"]),
     MenuItem(text: "Поиск", items: ["Выход"]),
     MenuItem(text: "Справка", items: ["Выход"]),
   ];
@@ -258,7 +260,7 @@ class _MainScreenState extends State<MainScreen> {
                                         ),
                                       ),
                                       Container(
-                                          width: 274,
+                                          width: MediaQuery.of(context).size.width * 0.25,
                                           height:
                                           MediaQuery.of(context).size.height -
                                               200,
@@ -358,7 +360,7 @@ class _MainScreenState extends State<MainScreen> {
       case "Папка":
         return BaseDatabaseConnect();
       case "Подключение":
-        return CreateDatabase();
+        return Querry();
       default:
         Container();
     }

@@ -26,7 +26,7 @@ class _CreateDatabaseState extends State<CreateDatabase> {
                 children: [
                   Container(
                     height: 25,
-                    color: Color(0xff2B2B2B),
+                    color: Color(0xff3C3F41),
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

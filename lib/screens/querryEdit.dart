@@ -11,24 +11,43 @@ class Querry extends StatefulWidget {
 }
 
 class _QuerryState extends State<Querry> {
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(10.0),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.7,
         height: MediaQuery.of(context).size.height * 0.85,
         color: secondaryColor,
         child: Container(
-          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                    height: 25,
+                    color: Color(0xff2B2B2B),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              height: 25,
+                              width: 120,
+                              color: Color(0xff3C3F41),
+                              alignment: Alignment.center,
+                              child: Text(
+                                  "Вывод"
+                              )
+                          ),
+                        ]
+                    ),
+                  ),
               SizedBox(height: 20),
               Container(
                 width: MediaQuery.of(context).size.width * 0.7,
                 height: 30,
-                color: Color(0xFF535657),
+                color: Color(0xFF46494A),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -39,20 +58,20 @@ class _QuerryState extends State<Querry> {
               SizedBox(height: 1),
               Container(
                 width: MediaQuery.of(context).size.width * 0.7,
-                height: 30,
-                color: Color(0xFF535657),
+                height: 26,
+                color: Color(0xFF46494A),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       padding: const EdgeInsets.all(5.0),
-                      width: 110,
-                      child: Text('Подключение'),
+                      width: 80,
+                      child: Text('Подключение:', style: TextStyle(fontSize: 12)),
                     ),
                     SizedBox(width: 5),
                     Container(
-                      width: 140,
+                      width: 110,
                       height: 22,
                       alignment: Alignment.centerRight,
                       decoration: BoxDecoration(
@@ -64,7 +83,74 @@ class _QuerryState extends State<Querry> {
                           )),
                           child: Icon(Icons.arrow_drop_down,size: 16),
                     ),
-                    VerticalDivider(),
+                    SizedBox(width: 5),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      width: 120,
+                      child: Text('Уровень изоляции транзакции:', style: TextStyle(fontSize: 12)),
+                    ),
+                    SizedBox(width: 5),
+                    Container(
+                      width: 200,
+                      height: 22,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF818181),
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )),
+                          child: Row(
+                            children: [
+                              Text('Стандартная база данных', style: TextStyle(fontSize: 12)),
+                              Icon(Icons.arrow_drop_down,size: 16),
+                            ],
+                          ),
+                    ),
+                    SizedBox(width: 5),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      width: 55,
+                      child: Text('Фильтр:', style: TextStyle(fontSize: 12)),
+                    ),
+                    SizedBox(width: 5),
+                    Container(
+                      width: 80,
+                      height: 22,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF818181),
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )),
+                    ),
+                    SizedBox(width: 5),
+                    Checkbox(
+                      value: isChecked,
+                      activeColor: Colors.transparent,
+                      onChanged: (value) => setState(() => isChecked = value!),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      width: 130,
+                      child: Text('Максимум строк:', style: TextStyle(fontSize: 12)),
+                    ),
+                    Container(
+                      width: 50,
+                      height: 22,
+                      alignment: Alignment.centerRight,
+                      decoration: BoxDecoration(
+                          color: isChecked ? Color(0xFF818181) : Color(0xFF5F5F5F),
+                          borderRadius: BorderRadius.circular(2),
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          )),
+                    ),
+                    SizedBox(width: 15),
                   ],
                 ),
               ),
