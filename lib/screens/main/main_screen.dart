@@ -10,6 +10,7 @@ import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import '../querryEdit.dart';
 import 'components/side_menu.dart';
 import '../../models/menu_item.dart';
 
@@ -295,15 +296,11 @@ class _MainScreenState extends State<MainScreen> {
                                     ],
                                   ),
                                 ),
-                                ReorderableListView(
-                                        shrinkWrap: true,
-                                        onReorder: reorderData,
-                                        children: [
-                                          for (int index = 0; index < toolBarItems.length; index++)
-                                            tree(toolBarItems[index], padding + 10, index)
-                                        ]
-                                    ),
-                                  ]
+                                for (int index = 0;
+                                    index < toolBarItems.length;
+                                    index++)
+                                  tree(toolBarItems[index], padding + 10, index)
+                              ]
                               )
                           )
                         ]
@@ -380,6 +377,7 @@ class _MainScreenState extends State<MainScreen> {
     onTap: () => setState(() => status = item.status!),
     child: item.child!.length == 0
         ? Container(
+          color: secondaryColor,
         height: 25,
         padding: EdgeInsets.only(
             top: 5,
