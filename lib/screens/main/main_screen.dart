@@ -330,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
       case Status.folder:
         return BaseDatabaseConnect();
       case Status.connection:
-        return Querry();
+        return CreateDatabase();
       default:
         Container();
     }
