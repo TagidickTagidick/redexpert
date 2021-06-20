@@ -155,7 +155,7 @@ class _MainScreenState extends State<MainScreen> {
         size: 22,
         color: Color(0xFFF0F0F0),
       ),
-      colorScheme: Theme.of(context).colorScheme,
+      //colorScheme: Theme.of(context).colorScheme,
     );
     return Scaffold(
       key: _scaffoldkey,
@@ -255,7 +255,11 @@ class _MainScreenState extends State<MainScreen> {
                                                                     0xff8A2627)
                                                                     : Color(
                                                                     0xff3C3F41))
-                                                          ]))))
+                                                          ]
+                                                          )
+                                                      )
+                                                  )
+                                              )
                                           ],
                                         ),
                                       ),
@@ -356,15 +360,16 @@ class _MainScreenState extends State<MainScreen> {
   Widget windows(String _selectedNode) {
     switch (_selectedNode) {
       case "База данных":
-        return DatabaseConnect();
+        return databaseConnect();
       case "Папка":
-        return BaseDatabaseConnect();
+        return databaseConnect();
       case "Подключение":
-        return Querry();
+        return BaseDatabaseConnect();
+      case "Создать базу данных":
+        return CreateDatabase();
       default:
-        Container();
+        return Querry();
     }
-    return Container();
   }
 
   Padding menuText(MenuItem item) => Padding(
@@ -383,7 +388,11 @@ class _MainScreenState extends State<MainScreen> {
                 height: 16,
                 child: Container(
                     width: 100,
-                    child: Text(choice, style: TextStyle(color: Colors.white))),
+                    child: Text(
+                        choice,
+                        style: TextStyle(color: Colors.white)
+                    )
+                ),
                 onTap: () {},
               );
             }).toList();
@@ -454,7 +463,158 @@ class _MainScreenState extends State<MainScreen> {
                   children: [
                       for (int i = 0; i < item.child!.length; i++)
                         tree(item.child![i], padding + 10, i + 10 * index)
-                    ]));
+                    ]
+          )
+      );
+
+  Container databaseConnect() {
+    var textStyle = TextStyle(fontSize: 14, color: textColor, fontWeight: FontWeight.w100);
+    var textStyle1 = TextStyle(fontSize: 12, color: textColor, fontWeight: FontWeight.w100);
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.7,
+        height: MediaQuery.of(context).size.height * 0.85,
+        color: Color(0xFF3C3F41),
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Подключение к базе данных',
+                style: TextStyle(fontSize: 22),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Параметры подключения определенные пользователем',
+                style: TextStyle(fontSize: 14),
+              ),
+              Container(
+                width: 450,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                        width: 180,
+                        color: Color(0xFF46494A),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _nodes!.first.children.add(Node(
+                              label: 'Новое подключение',
+                              key: 'Подключение',
+                              icon: Icons.insert_drive_file
+                          ))),
+                          child: Text(
+                            'Новое подключение',
+                            style: TextStyle(fontSize: 12, color: textColor),
+                          ),
+                        )),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    Container(
+                        width: 180,
+                        color: Color(0xFF46494A),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _selectedNode = "Создать базу данных"),
+                          child: Text(
+                              'Создать базу данных',
+                              style: textStyle
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                  'Доступные подключения',
+                  style: textStyle
+              ),
+              Container(
+                width: 980,
+                height: 30,
+                color: Color(0xFF46494A),
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 20,
+                      child: Text(' '),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Имя подключения', textAlign: TextAlign.center, style: textStyle),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Сервер', textAlign: TextAlign.center, style: textStyle),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Путь к базе данных', textAlign: TextAlign.center,style: textStyle),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Пользователь', textAlign: TextAlign.center,style: textStyle),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Драйвер', textAlign: TextAlign.center,style: textStyle),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: 30,
+                color: Color(0xFF535657),
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 20,
+                      child: SvgPicture.asset('assets/icons/databaseToolBar/connection.svg', width: 20, height: 20, color: Colors.white,),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Новое подключение', style: textStyle1, textAlign: TextAlign.center),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('localhost', style: textStyle1),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('', style: textStyle1),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('', style: textStyle1),
+                    ),
+                    VerticalDivider(),
+                    Expanded(
+                      child: Text('Jaybird 3 Driver', style: textStyle1),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  color: Color(0xFF46494A),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class DrawerListTile extends StatelessWidget {

@@ -230,6 +230,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "rich_code_editor",
+      "rootUri": "file:///Users/macbookair/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/rich_code_editor-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/macbookair/Documents/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -308,7 +314,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-06-20T06:06:40.279664Z",
+  "generated": "2021-06-20T07:15:15.303404Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-188.0.dev"
 }
