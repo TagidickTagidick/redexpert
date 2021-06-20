@@ -88,7 +88,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                     ),
                     VerticalDivider(),
                     Expanded(
-                      child: Text('Сервер'),
+                      child: Text('Сервер', textAlign: TextAlign.center, style: textStyle),
                     ),
                     VerticalDivider(),
                     Expanded(
