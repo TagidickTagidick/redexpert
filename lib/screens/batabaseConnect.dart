@@ -14,7 +14,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.7,
         height: MediaQuery.of(context).size.height * 0.85,
@@ -106,7 +106,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
                 ),
               ),
               Container(
-                width: 980,
+                width: MediaQuery.of(context).size.width * 0.7,
                 height: 30,
                 color: Color(0xFF535657),
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -143,7 +143,7 @@ class _DatabaseConnectState extends State<DatabaseConnect> {
               ),
               Expanded(
                 child: Container(
-                  width: 980,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   height: MediaQuery.of(context).size.height * 0.4,
                   color: Color(0xFF46494A),
                 ),

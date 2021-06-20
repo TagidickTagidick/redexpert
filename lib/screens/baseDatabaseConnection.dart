@@ -18,7 +18,7 @@ class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
       Padding(
           padding: EdgeInsets.all(10.0),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.75,
+            width: MediaQuery.of(context).size.width * 0.7,
             height: 500,
             color: secondaryColor,
             child: Column(
@@ -316,13 +316,13 @@ class _BaseDatabaseConnectState extends State<BaseDatabaseConnect> {
       ),
       Container(
         height: 20,
-        width: MediaQuery.of(context).size.width * 0.75,
+        width: MediaQuery.of(context).size.width * 0.7,
         color: Color(0xff3C3F41),
         child: Text("Вывод консоли"),
       ),
       Container(
         height: 249,
-        width: MediaQuery.of(context).size.width * 0.75,
+        width: MediaQuery.of(context).size.width * 0.7,
         child: ListView(
           shrinkWrap: true,
           children: [
